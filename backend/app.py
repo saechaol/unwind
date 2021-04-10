@@ -47,8 +47,8 @@ def register_user():
     if config.user_collection.count_documents({ 'email': email }, limit = 1) != 0:
         return jsonify(message="email already exists")
     userId = config.user_collection.count()
-    firstname = request.args.get('firstName')
-    lastname = request.args.get('lastName')
+    firstname = request.args.get('firstname')
+    lastname = request.args.get('lastname')
     password = request.args.get('password')
     score = 0
     config.user_collection.insert_one({'_id': userId, "firstname": firstname, "lastname": lastname, "email": email, "password": password, "score": score})
@@ -59,10 +59,36 @@ def register_user():
 def get_user():
     # if key doesnt exist, return nothing
     userId = request.args.get('userId')
-    user = config.user_collection.find_one({"_id": userId})
+    user = config.user_collection.find_one({"_id": int(userId)})
     return user
 
 
+# update
+@app.route('/api/user/update', methods=["POST"])
+def update_user():
+    email = request.args.get('email')
+    user = config.user_collection.find_one({'email': email})
+    firstname = request.args.get('firstname')
+    lastname = request.args.get('lastname')
+    password = request.args.get('password')
+
+    if not firstname:
+        firstname = user['firstname']
+    if not lastname:
+        lastname = user['lastname']
+    if not password:
+        password = user['password']
+
+    config.user_collection.find_one_and_update({'email': email}, {'$set': {'firstname': firstname, 'lastname': lastname, 'password': password}})
+    return jsonify(message="success")
+    
+@app.route('/api/get/username', methods=["GET"])
+def get_username():
+    # if key doesnt exist, return nothing
+    userId = request.args.get('userId')
+    user = config.user_collection.find_one({"_id": int(userId)})
+    print(user['email'])
+    return jsonify(message="success")
 
 if __name__ == '__main__':
     app.run()
