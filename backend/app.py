@@ -47,12 +47,23 @@ def register_user():
     if config.user_collection.count_documents({ 'email': email }, limit = 1) != 0:
         return jsonify(message="email already exists")
     userId = config.user_collection.count()
-    firstname = request.args.get('firstname')
-    lastname = request.args.get('lastname')
+    firstname = request.args.get('firstName')
+    lastname = request.args.get('lastName')
     password = request.args.get('password')
     score = 0
     config.user_collection.insert_one({'_id': userId, "firstname": firstname, "lastname": lastname, "email": email, "password": password, "score": score})
     return jsonify(message="success")
+@app.route('/api/post/auth', methods=['POST'])
+def auth_user():
+    email = request.args.get('email')
+    password = request.args.get('password')
+    user = config.user_collection.find_one({'email' : email})
+    if user and password == user['password']:
+        del user['password']
+        return jsonify(message="success")
+    else:
+        return jsonify(message="Invalid email or password")
+
 
 # get user 
 @app.route('/api/get/user/', methods=["GET"])
