@@ -43,12 +43,15 @@ def test_register_user():
 # register user
 @app.route('/api/post/register', methods=["POST"])
 def register_user(): 
-    userId = config.user_collection.count() + 1
-    username = request.args.get('username')
-    password = request.args.get('password')
     email = request.args.get('email')
+    if config.user_collection.count_documents({ 'email': email }, limit = 1) != 0:
+        return jsonify(message="email already exists")
+    userId = config.user_collection.count()
+    firstname = request.args.get('firstName')
+    lastname = request.args.get('lastName')
+    password = request.args.get('password')
     score = 0
-    config.user_collection.insert_one({'_id': userId, "email": email, "username": username, "password": password, "score": score})
+    config.user_collection.insert_one({'_id': userId, "firstname": firstname, "lastname": lastname, "email": email, "password": password, "score": score})
     return jsonify(message="success")
 
 # get user 
