@@ -11,6 +11,7 @@ flask-pymongo = "*"
 dnspython = "*"
 db = "*"
 flask-restful = "*"
+marshmallow = "*"
 
 [dev-packages]
 
