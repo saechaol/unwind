@@ -1,1 +1,18 @@
-/* TODO navbar style */
+.sidebar {
+    position: fixed;
+    height: 100%;
+    width: 75px;
+    z-index: 1;
+    background-color: #ffb8ad;
+    overflow-x: hidden;
+    padding-top: 10px;
+}
+.logo {
+    max-width: 75px;
+    max-height: 75px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    padding-bottom: 10px;
+}

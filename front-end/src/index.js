@@ -5,13 +5,16 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 // Pages
+import Landing from './pages/Landing';
 import Home from './pages/Home';
+
 
 const App = () => {
   return (
   <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Home}/>
+        <Route path="/" exact component={Landing}/>
+        <Route path="/home" exact component={Home}/>
       </Switch>
     </BrowserRouter>
   );
