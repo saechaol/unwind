@@ -18,10 +18,10 @@ function App() {
         <p>
           unwind 
         </p>
-        {/* <div id="container">
+        <div id="container">
             <button type="button logon-button" id="button_logon" >log in</button>
             <button type="button signup-button" id="button_signup">sign up</button>
-        </div> */}
+        </div>
     </div>
   );
 }
