@@ -1,38 +1,88 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    text-align: center;
+    background-color: #9bb39b;
+    width: 1500px;
+    height: 80px;
+    margin-top: -205px;
+  }
+.App-header {border-radius: 12px;}
+
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  .App {
+    background-color: #9bb39b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Script MT Bold", cursive; 
+    font-size: 100px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 500; 
+    color: #f0f0f0f5;
+  }
+
+#button_logon{
+    width: 150px;
+    height: 50px;
+    background-color: #f0f0f0f5; 
+    border: none;
+    color: #9bb39b;
+    margin-left: -10px;
+    font-family: "Roboto"; 
+    
+}
+#button_logon {border-radius: 12px;}
+#button_signup{
+    width: 150px;
+    height: 50px;
+    background-color: #f0f0f0f5; 
+    border: none;
+    color: #9bb39b;
+    margin-left: 10px;
+    font-family: "Roboto" 
+}
+#button_signup {border-radius: 12px;}
+#container{
+    text-align: center;
+    margin-top: -50px;
 }
 
-.App-link {
-  color: #61dafb;
+  
+
+#button_logo{
+    width: 150px;
+    height: 50px;
+    background-color: #9bb39b; 
+    border: none;
+    color: #f0f0f0f5;
+    margin-left: -10px;
+    font-family: "Roboto"; 
+    font-size: 25px; 
+    
+}
+#button_logo {border-radius: 12px;}
+#button_about{
+    width: 150px;
+    height: 50px;
+    background-color: #9bb39b; 
+    border: none;
+    color: #f0f0f0f5;
+    margin-left: 10px;
+    font-family: "Roboto" ;
+    font-size: 25px;
+}
+#button_about {border-radius: 12px;}
+#containertop{
+    text-align: center;
+    margin-top: -170px;
+    margin-left: -1150px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+  
