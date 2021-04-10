@@ -8,6 +8,22 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 1;
+}
+.landingText {
+    display: block;
+    position: absolute;
+    top: 35%;
+    left: 25%;
+    width: 50%;
+    z-index: 2;
+}
+
+.landingAuth {
+    position: fixed;
+    top: 8px;
+    right: 16px;
+    z-index: 3;
 }
 @media screen and (max-width: 1024px) {
     .landingBG {

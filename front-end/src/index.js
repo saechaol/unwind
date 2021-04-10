@@ -7,6 +7,8 @@ import * as serviceWorker from './serviceWorker';
 // Pages
 import Landing from './pages/Landing';
 import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 
 const App = () => {
@@ -15,6 +17,8 @@ const App = () => {
       <Switch>
         <Route path="/" exact component={Landing}/>
         <Route path="/home" exact component={Home}/>
+        <Route path="/login" exact component={Login}/>
+        <Route path="/signup" exact component={Signup}/>
       </Switch>
     </BrowserRouter>
   );
