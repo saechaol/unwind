@@ -49,6 +49,7 @@ def register_user():
     email = request.args.get('email')
     score = 0
     config.user_collection.insert_one({'_id': userId, "email": email, "username": username, "password": password, "score": score})
+    return jsonify(message="success")
 
 # get user 
 @app.route('/api/get/user/', methods=["GET"])
