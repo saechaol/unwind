@@ -6,6 +6,7 @@ from flask_restful import Resource, Api
 from bson import json_util
 from bson.json_util import dumps
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 import requests
 import json
 import config
@@ -57,6 +58,7 @@ def register_user():
     firstname = data['firstName']
     lastname = data['lastName']
     password = data['password']
+    password = generate_password_hash(password)
     score = 0
     user = {'_id': userId, "firstname": firstname, "lastname": lastname, "email": email, "password": password, "score": score}
     config.user_collection.insert_one(user)
@@ -68,8 +70,9 @@ def auth_user():
     data = request.get_json()
     email = data['email']
     password = data['password']
+    password = generate_password_hash(password)
     user = config.user_collection.find_one({'email' : email})
-    if user and password == user['password']:
+    if user and check_password_hash(password, user['password']):
         session['_id'] = user['_id']
         session['firstname'] = user['firstname']
         del user['password']
@@ -98,6 +101,7 @@ def update_user():
     firstname = request.args.get('firstname')
     lastname = request.args.get('lastname')
     password = request.args.get('password')
+    password = generate_password_hash(password)
 
     if not firstname:
         firstname = user['firstname']

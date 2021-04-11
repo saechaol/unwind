@@ -13,6 +13,7 @@ db = "*"
 flask-restful = "*"
 marshmallow = "*"
 flask-session = "*"
+werkzeug = "*"
 
 [dev-packages]
 
