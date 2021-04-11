@@ -3,7 +3,7 @@
     height: 100%;
     width: 75px;
     z-index: 1;
-    background-color: #ffb8ad;
+    background-color: white;
     overflow-x: hidden;
     padding-top: 10px;
 }
@@ -15,4 +15,8 @@
     margin-right: auto;
     width: 75%;
     padding-bottom: 10px;
+}
+.logoSettings {
+    position: absolute;
+    bottom: 1%;
 }

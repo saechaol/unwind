@@ -1,20 +1,30 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../../media/unwind_icon.png';
+import home from './home.svg';
+import gift from './card_giftcard.svg';
+import check from './check_box.svg';
+import list from './list_alt.svg';
+import settings from './settings.svg';
 import './styles.css';
 
 
 const NavBar = () => {
     return (
         <div className="sidebar">
-            <NavLink to="/">
-                <img src={logo} alt="logo" className="logo"/>
+            <NavLink to="/home">
+                <img src={home} alt="logo" className="logo"/>
             </NavLink>
-            <NavLink to="/">
-                <img src={logo} alt="logo" className="logo"/>
+            <NavLink to="/history">
+                <img src={check} alt="logo" className="logo"/>
             </NavLink>
-            <NavLink to="/">
-                <img src={logo} alt="logo" className="logo"/>
+            <NavLink to="/rewards">
+                <img src={gift} alt="logo" className="logo"/>
+            </NavLink>
+            <NavLink to="/transactions">
+                <img src={list} alt="logo" className="logo"/>
+            </NavLink>
+            <NavLink to="/settings">
+                <img src={settings} alt="logo" className="logoSettings"/>
             </NavLink>
         </div>
     );

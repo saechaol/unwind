@@ -12,6 +12,10 @@ import Landing from './pages/Landing';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import History from './pages/History';
+import Rewards from './pages/Rewards';
+import Transactions from './pages/Transactions';
+import Settings from './pages/Settings';
 
 //redux
 import rootReducer from './redux/reducers/rootReducer';
@@ -22,21 +26,25 @@ const axios = require("axios");
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    axios.post('http://localhost:5000/api/post/auth').then(res => {
-      if (res.data.success) {
-        dispatch(loginUser(res.data.user));
-      }
-    });
-  },[]);
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   axios.post('http://localhost:5000/api/post/auth').then(res => {
+  //     if (res.data.success) {
+  //       dispatch(loginUser(res.data.user));
+  //     }
+  //   });
+  // },[]);
   return (
   <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Landing} />
         <Route path="/home" exact component={Home}/>
-        <Route exact path="/login" exact component={Login} />
+        <Route path="/login" exact component={Login} />
         <Route path="/signup" exact component={Signup}/>
+        <Route path="/history" exact component={History} />
+        <Route path="/rewards" exact component={Rewards} />
+        <Route path="/transactions" exact component={Transactions} />
+        <Route path="/settings" exact component={Settings} />
       </Switch>
     </BrowserRouter>
   );
