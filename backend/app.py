@@ -42,17 +42,31 @@ def test_register_user():
 
 # register user
 @app.route('/api/post/register', methods=["POST"])
-def register_user(): 
-    email = request.args.get('email')
+def register_user():
+    data = request.get_json()
+    email = data['email']
     if config.user_collection.count_documents({ 'email': email }, limit = 1) != 0:
         return jsonify(message="email already exists")
     userId = config.user_collection.count()
-    firstname = request.args.get('firstname')
-    lastname = request.args.get('lastname')
-    password = request.args.get('password')
+    firstname = data['firstName']
+    lastname = data['lastName']
+    password = data['password']
     score = 0
-    config.user_collection.insert_one({'_id': userId, "firstname": firstname, "lastname": lastname, "email": email, "password": password, "score": score})
-    return jsonify(message="success")
+    user = {'_id': userId, "firstname": firstname, "lastname": lastname, "email": email, "password": password, "score": score}
+    config.user_collection.insert_one(user)
+    return jsonify(success=True, user=user)
+@app.route('/api/post/auth', methods=['POST'])
+def auth_user():
+    data = request.get_json()
+    email = data['email']
+    password = data['password']
+    user = config.user_collection.find_one({'email' : email})
+    if user and password == user['password']:
+        del user['password']
+        return jsonify(success=True, user=user)
+    else:
+        return jsonify(success=False)
+
 
 # get user 
 @app.route('/api/get/user/', methods=["GET"])
