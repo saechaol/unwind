@@ -3,7 +3,6 @@ from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 from flask_pymongo import pymongo
 from flask_restful import Resource, Api
-from flask.ext.session import Session
 from bson import json_util
 from bson.json_util import dumps
 from datetime import datetime
@@ -13,8 +12,7 @@ import config
 
 app = Flask(__name__)
 app.config['SESSION_TYPE'] = 'memcached'
-app.config['SECRET_KEY'] = 'super secret key'
-session = Session()
+app.config['SECRET_KEY'] = 'qwpkrefu'
 CORS(app)
 socketio = SocketIO(app)
 
