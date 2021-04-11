@@ -1,3 +1,4 @@
+/* Landing Page */
 .landingBG {
     min-height: 100%;
     min-width: 1024px;
@@ -25,9 +26,42 @@
     right: 16px;
     z-index: 3;
 }
-@media screen and (max-width: 1024px) {
-    .landingBG {
-        left: 50%;
-        margin-left: -512px;
-    }
+/* Login */
+.login {
+    display: flex;
+    height: 100vh;
+}
+.loginLeft {
+    flex: 0 1 50%;
+    min-height: 100%;
+    max-width: 50%;
+    background: #9bb39b;
+    padding: .5em;
+}
+.loginTitle {
+    max-width: 50vh;
+    display: block;
+    margin-top: 15%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.loginRight {
+    flex: 0 1 50%;
+    display: flex;
+    height: 100%;
+    max-width: 50%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+.vertical {
+    text-align: center;
+    width: 100%;
+}
+.loginForm {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+.loginButton {
+    margin-top: 4%;
 }

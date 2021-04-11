@@ -9,7 +9,7 @@ const Landing = () => {
             <img src={landingBG} alt="landingImage" className="landingBG" />
             <img src={landingText} alt="landingText" className="landingText" />
             <div class="landingAuth">
-                <NavLink to="/login" activeStyle>
+                <NavLink to="/login">
                     Login
                 </NavLink>
                 <NavLink to="/signup">
