@@ -12,6 +12,7 @@ dnspython = "*"
 db = "*"
 flask-restful = "*"
 marshmallow = "*"
+flask-session = "*"
 
 [dev-packages]
 
