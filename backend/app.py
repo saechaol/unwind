@@ -179,7 +179,6 @@ def get_user_activities():
                 return jsonify(message="Requested resource does not exist")
             return activities
    
-
 # get activities
 @app.route('/api/get/activities', methods=["GET"])
 def get_activities():
