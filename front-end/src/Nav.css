@@ -1,9 +1,9 @@
 .sidebar {
     position: fixed;
-    height: 220%;
+    height: 238%;
     width: 75px;
     z-index: 1;
-    background-color: #ffb8ad;
+    background-color: #697469;
     overflow-x: hidden;
     padding-top: 10px;
     margin-left: -1360px;

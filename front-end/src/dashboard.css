@@ -1,5 +1,5 @@
 .dashboard {
-    background-color: #ebe9e9;
+    background-color: #9bb39b;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -10,15 +10,15 @@
     font-style: normal; 
     font-variant: normal; 
     font-weight: 500; 
-    color: #ffb8add7;
+    color: #f0f0f0f5;
   }
   
   #act1{
     width: 300px;
     height: 400px;
-    background-color: #ffe1ade1; 
+    background-color: #697469; 
     border: none;
-    color: #000000;
+    color: #f0f0f0f5;
     margin-left: 0px;
     font-family: "Roboto"; 
     font-size: 20px; 
@@ -29,9 +29,9 @@
 #act2{
     width: 300px;
     height: 400px;
-    background-color: #ffe1ade1; 
+    background-color: #697469; 
     border: none;
-    color: #000000;
+    color: #f0f0f0f5;
     margin-left: 100px;
     font-family: "Roboto" ;
     font-size: 20px; 
@@ -41,9 +41,9 @@
 #act3{
     width: 300px;
     height: 400px;
-    background-color: #ffe1ade1; 
+    background-color: #697469; 
     border: none;
-    color: #000000;
+    color: #f0f0f0f5;
     margin-left: 100px;
     font-family: "Roboto" ;
     font-size: 20px; 
@@ -63,9 +63,9 @@
 #act4{
     width: 300px;
     height: 400px;
-    background-color: #ffe1ade1; 
+    background-color: #697469; 
     border: none;
-    color: #ff9d8ef6;
+    color: #f0f0f0f5;
     margin-left: 0px;
     font-family: "Roboto"; 
     font-size: 20px; 
@@ -76,9 +76,9 @@
 #act5{
     width: 300px;
     height: 400px;
-    background-color: #ffe1ade1; 
+    background-color: #697469; 
     border: none;
-    color: #ff9d8ef6;
+    color: #f0f0f0f5;
     margin-left: 100px;
     font-family: "Roboto" ;
     font-size: 20px; 
@@ -88,9 +88,9 @@
 #act6{
     width: 300px;
     height: 400px;
-    background-color: #ffe1ade1; 
+    background-color: #697469; 
     border: none;
-    color: #ff9d8ef6;
+    color: #f0f0f0f5;
     margin-left: 100px;
     font-family: "Roboto" ;
     font-size: 20px; 
@@ -109,9 +109,9 @@
 #act7{
     width: 300px;
     height: 400px;
-    background-color: #ffe1ade1; 
+    background-color: #697469; 
     border: none;
-    color: #ff9d8ef6;
+    color: #f0f0f0f5;
     margin-left: 0px;
     font-family: "Roboto"; 
     font-size: 20px; 
@@ -122,9 +122,9 @@
 #act8{
     width: 300px;
     height: 400px;
-    background-color: #ffe1ade1; 
+    background-color: #697469; 
     border: none;
-    color: #ff9d8ef6;
+    color: #f0f0f0f5;
     margin-left: 100px;
     font-family: "Roboto" ;
     font-size: 20px; 
@@ -134,9 +134,9 @@
 #act9{
     width: 300px;
     height: 400px;
-    background-color: #ffe1ade1; 
+    background-color: #697469; 
     border: none;
-    color: #ff9d8ef6;
+    color: #f0f0f0f5;
     margin-left: 100px;
     font-family: "Roboto" ;
     font-size: 20px; 
