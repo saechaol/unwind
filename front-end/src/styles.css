@@ -28,6 +28,31 @@
     color: #f0f0f0f5;
   }
 
+  .About
+  {
+    background-color: #9bb39b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Script MT Bold", cursive; 
+    font-size: 50px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 500; 
+    color: #f0f0f0f5;
+  }
+
+  .About-title {
+    text-align: center;
+    background-color: #9bb39b;
+    width: 1500px;
+    height: 80px;
+    margin-top: -450px;
+    font-size: 100px; 
+  }
+  
 #button_logon{
     width: 150px;
     height: 50px;
@@ -36,6 +61,7 @@
     color: #9bb39b;
     margin-left: -10px;
     font-family: "Roboto"; 
+    font-size: 20px; 
     
 }
 #button_logon {border-radius: 12px;}
@@ -46,7 +72,9 @@
     border: none;
     color: #9bb39b;
     margin-left: 10px;
-    font-family: "Roboto" 
+    font-family: "Roboto" ;
+    font-size: 20px; 
+
 }
 #button_signup {border-radius: 12px;}
 #container{
@@ -66,6 +94,7 @@
     font-family: "Roboto"; 
     font-size: 25px; 
     
+    
 }
 #button_logo {border-radius: 12px;}
 #button_about{
@@ -79,9 +108,24 @@
     font-size: 25px;
 }
 #button_about {border-radius: 12px;}
+
+#button_account{
+  width: 150px;
+  height: 50px;
+  background-color: #9bb39b; 
+  border: none;
+  color: #f0f0f0f5;
+  margin-right: 0px;
+  font-family: "Roboto" ;
+  font-size: 25px;
+  text-align: center;
+}
+#button_account {border-radius: 12px;}
+
+
 #containertop{
     text-align: center;
-    margin-top: -170px;
+    margin-top: -160px;
     margin-left: -1150px;
 }
 
