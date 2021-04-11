@@ -25,7 +25,7 @@ const Signup = () => {
     }
     const handleSignUp = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/api/post/register', user)
+        axios.post('https://citrushack-310405.wl.r.appspot.com/api/post/register', user)
         .then(response => {
             if(response.data.success){
                 dispatch(loginUser(response.data.user))
