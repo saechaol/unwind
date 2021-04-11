@@ -16,7 +16,10 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def get_entry():
-    return ("GET request successful!\n/")
+    if 'firstname' in session:
+        name = session['firstname']
+        return 'Welcome back, ' + name + '!'
+    return ("You are not logged in.")
 
 @app.route('/api/test/get')
 def test_get():
@@ -56,6 +59,7 @@ def register_user():
     user = {'_id': userId, "firstname": firstname, "lastname": lastname, "email": email, "password": password, "score": score}
     config.user_collection.insert_one(user)
     session['_id'] = user['_id']
+    session['firstname'] = user['firstname']
     return jsonify(success=True, user=user)
 @app.route('/api/post/auth', methods=['POST'])
 def auth_user():
@@ -65,6 +69,7 @@ def auth_user():
     user = config.user_collection.find_one({'email' : email})
     if user and password == user['password']:
         session['_id'] = user['_id']
+        session['firstname'] = user['firstname']
         del user['password']
         return jsonify(success=True, user=user)
     else:
