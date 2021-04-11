@@ -65,3 +65,40 @@
 .loginButton {
     margin-top: 4%;
 }
+
+/* Sign Up*/
+.signup {
+    display: block;
+    height: 100vh;
+    background-color: #9bb39b;
+}
+
+.signupTitle {
+    max-width: 50vh;
+    height: 25%;
+    display: block;
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+.signupForm {
+    width: 30%;
+    height: auto;
+    padding: 20px;
+    margin-top: 5%;
+    padding-bottom: 5%;
+    display: block;
+    text-align: center;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+.signupForm label {
+    padding: 5px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.signupButton {
+    margin-top: 3%;
+}
