@@ -60,7 +60,8 @@ def auth_user():
     user = config.user_collection.find_one({'email' : email})
     if user and password == user['password']:
         del user['password']
-        return jsonify(message="success")
+        userId = user['_id']
+        return jsonify(message="success", token=userId)
     else:
         return jsonify(message="Invalid email or password")
 
