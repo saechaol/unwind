@@ -1,4 +1,5 @@
 .history {
+    min-height: 100vh;
     background: #a0b39e;
     height: auto;
 }

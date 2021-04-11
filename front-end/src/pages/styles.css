@@ -102,3 +102,25 @@
 .signupButton {
     margin-top: 3%;
 }
+
+/* pages */
+.home {
+    min-height: 100vh;
+    background: #a0b39e;
+    height: auto;
+}
+.rewards {
+    min-height: 100vh;
+    background: #a0b39e;
+    height: auto;
+}
+.transactions {
+    min-height: 100vh;
+    background: #a0b39e;
+    height: auto;
+}
+.settings {
+    min-height: 100vh;
+    background: #a0b39e;
+    height: auto;
+}
