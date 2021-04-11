@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response, render_template
+from flask import Flask, request, jsonify, make_response, render_template, session
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 from flask_pymongo import pymongo
@@ -66,8 +66,8 @@ def get_user():
 # update
 @app.route('/api/user/update', methods=["POST"])
 def update_user():
-    email = request.args.get('email')
-    user = config.user_collection.find_one({'email': email})
+    current_user_id = session['_id']
+    user = config.user_collection.find_one({'_id': current_user_id})
     firstname = request.args.get('firstname')
     lastname = request.args.get('lastname')
     password = request.args.get('password')
@@ -89,6 +89,31 @@ def get_username():
     user = config.user_collection.find_one({"_id": int(userId)})
     print(user['email'])
     return jsonify(message="success")
+
+# get transactions by user
+# if transactionId is provided, searches for this instead
+# else returns all transactions as a list
+@app.route('/api/user/transactions', methods=["GET"])
+def get_transactions():
+    if '_id' in session:
+        current_user_id = session['_id']
+    else:
+        current_user_id = request.args.get('userId')
+    
+    user = config.user_collection.find_one({"_id": int(current_user_id)})
+    print(user)
+    if 'transactionId' in request.args:
+        transaction_id = request.args.get('transactionId')
+        transaction = config.transaction_collection.find_one({"_id": int(transaction_id)})
+        return transaction 
+    else:
+        transactions = dumps(config.transaction_collection.find({"redeemed_by": user['_id']}))
+    return transactions
+
+# get activities
+@app.route('/api/get/activities', methods=["GET"])
+def get_activities():
+    return dumps(config.activity_collection.find())
 
 if __name__ == '__main__':
     app.run()
