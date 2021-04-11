@@ -1,20 +1,19 @@
 import './styles.css';
 import landingBG from '../media/landingBG.svg';
 import landingText from '../media/text.svg';
-import { NavLink } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 const Landing = () => {
     return(
         <div className="landing">
-            <img src={landingBG} alt="landingImage" className="landingBG" />
             <img src={landingText} alt="landingText" className="landingText" />
             <div class="landingAuth">
-                <NavLink to="/login">
+                <Button className="buttons" variant="light" href="/login">
                     Login
-                </NavLink>
-                <NavLink to="/signup">
+                </Button>
+                <Button className="buttons" variant="light" href="/signup">
                     Sign Up
-                </NavLink>
+                </Button>
             </div>
         </div>
     );

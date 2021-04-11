@@ -48,19 +48,19 @@ const Login = () => {
             <div className="loginRight">
                 <p className="vertical">welcome to unwind</p>
                 <form className="loginForm">
-                    <label>
+                    <label className="label">
                         <p>email:</p>
                         <input type="email" name="email" value={user.email} onChange={handleChange} required/>
                     </label>
-                    <label>
+                    <label className="label">
                         <p>password:</p>
                         <input type="password" name="password" value={user.password} onChange={handleChange} required />
                     </label>
                     <div className="loginButton">
-                        <Button variant="dark" onClick={handleLogin}>log in</Button>
+                        <Button className="loginButton" variant="dark" onClick={handleLogin}>log in</Button>
                     </div>
                 </form>
-                <p className="vertical">New to Unwind? Create Account </p>
+                <p className="vertical">New to Unwind? <a href="/signup"><u> Create Account </u></a></p>
             </div>
         </div>
     );
