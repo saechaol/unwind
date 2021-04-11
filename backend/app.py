@@ -110,10 +110,21 @@ def get_transactions():
         transactions = dumps(config.transaction_collection.find({"redeemed_by": user['_id']}))
     return transactions
 
+# get activities completed by user
+
+
 # get activities
 @app.route('/api/get/activities', methods=["GET"])
 def get_activities():
     return dumps(config.activity_collection.find())
+
+# get rewards
+@app.route('/api/get/rewards', methods=["GET"])
+def get_rewards():
+    if 'rewardId' in request.args:
+        rewardId = request.args.get('rewardId')
+        return config.reward_collection.find_one({"_id": int(rewardId)})
+    return dumps(config.reward_collection.find())
 
 if __name__ == '__main__':
     app.run()
