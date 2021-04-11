@@ -94,24 +94,45 @@ def get_username():
 # if transactionId is provided, searches for this instead
 # else returns all transactions as a list
 @app.route('/api/user/transactions', methods=["GET"])
-def get_transactions():
+def get_user_transactions():
     if '_id' in session:
         current_user_id = session['_id']
     else:
         current_user_id = request.args.get('userId')
     
     user = config.user_collection.find_one({"_id": int(current_user_id)})
-    print(user)
+    
     if 'transactionId' in request.args:
         transaction_id = request.args.get('transactionId')
         transaction = config.transaction_collection.find_one({"_id": int(transaction_id)})
+        if not transaction:
+            return jsonify(message="Requested resource does not exist")
         return transaction 
     else:
         transactions = dumps(config.transaction_collection.find({"redeemed_by": user['_id']}))
     return transactions
 
 # get activities completed by user
-
+@app.route('/api/user/activities', methods=["GET"])
+def get_user_activities():
+    if '_id' in session:
+        current_user_id = session['_id']
+    else:
+        current_user_id = request.args.get('userId')
+    if 'completionId' in request.args:
+        completion_id = request.args.get('completionId')
+        activity = config.completed_collection.find_one({"_id": int(completion_id)})
+        if not activity:
+            return jsonify(message="Requested resource does not exist")
+        return activity
+    else:
+        user = config.user_collection.find_one({"_id": int(current_user_id)})
+        if not user:
+            return jsonify(message="Requested resource does not exist")
+        activities = dumps(config.completed_collection.find({"user_id": user['_id']}))
+        if not activities:
+            return jsonify(message="Requested resource does not exist")
+    return activities
 
 # get activities
 @app.route('/api/get/activities', methods=["GET"])
