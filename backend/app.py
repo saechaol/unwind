@@ -193,6 +193,10 @@ def get_user_activities():
 def get_activities():
     return dumps(config.activity_collection.find())
 
+@app.route('/api/get/activity/<activityId>', methods=['GET'])
+def get_activity(activityId):
+    return dumps(config.activity_collection.find_one({"_id" : int(activityId)}))
+
 # get rewards
 @app.route('/api/get/rewards', methods=["GET"])
 def get_rewards():
