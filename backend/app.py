@@ -66,7 +66,10 @@ def get_user():
 # update
 @app.route('/api/user/update', methods=["POST"])
 def update_user():
-    current_user_id = session['_id']
+    if '_id' in session:
+        current_user_id = session['_id']
+    else:
+        current_user_id = request.args.get('userId')
     user = config.user_collection.find_one({'_id': current_user_id})
     firstname = request.args.get('firstname')
     lastname = request.args.get('lastname')
@@ -79,7 +82,7 @@ def update_user():
     if not password:
         password = user['password']
 
-    config.user_collection.find_one_and_update({'email': email}, {'$set': {'firstname': firstname, 'lastname': lastname, 'password': password}})
+    config.user_collection.find_one_and_update({"_id": int(current_user_id)}, {'$set': {'firstname': firstname, 'lastname': lastname, 'password': password}})
     return jsonify(message="success")
     
 @app.route('/api/get/username', methods=["GET"])
@@ -93,24 +96,36 @@ def get_username():
 # get transactions by user
 # if transactionId is provided, searches for this instead
 # else returns all transactions as a list
-@app.route('/api/user/transactions', methods=["GET"])
+@app.route('/api/user/transactions', methods=["GET", "POST"])
 def get_user_transactions():
     if '_id' in session:
         current_user_id = session['_id']
     else:
         current_user_id = request.args.get('userId')
-    
-    user = config.user_collection.find_one({"_id": int(current_user_id)})
-    
-    if 'transactionId' in request.args:
-        transaction_id = request.args.get('transactionId')
-        transaction = config.transaction_collection.find_one({"_id": int(transaction_id)})
-        if not transaction:
-            return jsonify(message="Requested resource does not exist")
-        return transaction 
+        user = config.user_collection.find_one({"_id": int(current_user_id)})
+            
+    if request.method == "POST":
+        rewardId = request.args.get('rewardId')
+        reward = config.reward_collection.find_one({"_id": int(rewardId)})
+        if user['score'] < reward['cost']:
+            return jsonify(message="You don't have enough points to redeem this reward.")
+        transactionId = config.transaction_collection.count()
+        while config.transaction_collection.count_documents({ '_id': transactionId }, limit = 1) != 0:
+            transactionId += 1
+        
+        transact_score(user['_id'], reward['_id'])
+        config.transaction_collection.insert_one({"_id": transactionId, "reward_id": reward['_id'], "redeemed_by": user['_id']})
+        return jsonify(message="success")
     else:
-        transactions = dumps(config.transaction_collection.find({"redeemed_by": user['_id']}))
-    return transactions
+        if 'transactionId' in request.args:
+            transaction_id = request.args.get('transactionId')
+            transaction = config.transaction_collection.find_one({"_id": int(transaction_id)})
+            if not transaction:
+                return jsonify(message="Requested resource does not exist")
+            return transaction 
+        else:
+            transactions = dumps(config.transaction_collection.find({"redeemed_by": user['_id']}))
+        return transactions
 
 # get activities completed by user
 @app.route('/api/user/activities', methods=["GET"])
@@ -146,6 +161,16 @@ def get_rewards():
         rewardId = request.args.get('rewardId')
         return config.reward_collection.find_one({"_id": int(rewardId)})
     return dumps(config.reward_collection.find())
+
+def transact_score(user_id, reward_id):
+    reward = config.reward_collection.find_one({"_id": reward_id})
+    cost = reward['cost']
+    user = config.user_collection.find_one({"_id": user_id})
+    if user['score'] < cost:
+        return jsonify(message="You don't have enough points to redeem this reward")
+    else:
+        new_score = user['score'] - cost
+        config.user_collection.find_one_and_update({"_id": user_id}, {'$set': {"score": new_score}})
 
 if __name__ == '__main__':
     app.run()
