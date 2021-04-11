@@ -102,7 +102,8 @@ def get_user_transactions():
         current_user_id = session['_id']
     else:
         current_user_id = request.args.get('userId')
-        user = config.user_collection.find_one({"_id": int(current_user_id)})
+    
+    user = config.user_collection.find_one({"_id": int(current_user_id)})
             
     if request.method == "POST":
         rewardId = request.args.get('rewardId')
