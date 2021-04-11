@@ -1,12 +1,12 @@
-import './styles.css';
+import './act.css';
 import NavBar from './Nav.js';
 import logo from './unwind_icon.png';
 import { NavLink } from 'react-router-dom';
 
 
-function dashboard() {
+function actcompleted() {
   return (
-    <div className="dashboard">
+    <div className="actcompleted">
         <NavBar/>
         <p>
           welcome, name 
@@ -14,10 +14,11 @@ function dashboard() {
 
         <div id="row1">
         <NavLink to="/act1">
-          <button type="button act1" id="act1" >take a walk</button>
+          <button type="button act1" id="act1" >take a walk
+          </button>
         </NavLink>
         <NavLink to="/act2">
-          <button type="button act2" id="act2">write your thoughts in a journal</button>
+          <button type="button act2" id="act2">(4/11/21) wrote out thoughts in journal</button>
         </NavLink>
         <NavLink to="/act3">
           <button type="button act3" id="act3">meditate for 15 min</button>
@@ -52,4 +53,4 @@ function dashboard() {
   );
 }
 
-export default dashboard;
+export default actcompleted;
