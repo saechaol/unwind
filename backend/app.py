@@ -5,6 +5,7 @@ from flask_pymongo import pymongo
 from flask_restful import Resource, Api
 from bson import json_util
 from bson.json_util import dumps
+from datetime import datetime
 import requests
 import json
 import config
@@ -115,7 +116,10 @@ def get_user_transactions():
             transactionId += 1
         
         transact_score(user['_id'], reward['_id'])
-        config.transaction_collection.insert_one({"_id": transactionId, "reward_id": reward['_id'], "redeemed_by": user['_id']})
+        user_transactions = user['transaction_history']
+        user_transactions.append(transactionId)
+        config.user_collection.find_one_and_update({"_id": user['_id']}, {'$set': {"transaction_history": user_transactions}})
+        config.transaction_collection.insert_one({"_id": transactionId, "reward_id": reward['_id'], "redeemed_by": user['_id'], "transaction_completed": datetime.utcnow().isoformat()})
         return jsonify(message="success")
     else:
         if 'transactionId' in request.args:
@@ -129,26 +133,38 @@ def get_user_transactions():
         return transactions
 
 # get activities completed by user
-@app.route('/api/user/activities', methods=["GET"])
+@app.route('/api/user/activities', methods=["GET", "POST"])
 def get_user_activities():
     if '_id' in session:
         current_user_id = session['_id']
     else:
         current_user_id = request.args.get('userId')
-    if 'completionId' in request.args:
-        completion_id = request.args.get('completionId')
-        activity = config.completed_collection.find_one({"_id": int(completion_id)})
-        if not activity:
-            return jsonify(message="Requested resource does not exist")
-        return activity
-    else:
+
+    if request.method == "POST":
+        activityId = request.args.get('activityId')
+        activity = config.activity_collection.find_one({"_id": int(activityId)})
         user = config.user_collection.find_one({"_id": int(current_user_id)})
-        if not user:
-            return jsonify(message="Requested resource does not exist")
-        activities = dumps(config.completed_collection.find({"user_id": user['_id']}))
-        if not activities:
-            return jsonify(message="Requested resource does not exist")
-    return activities
+
+        if not activity:
+            return jsonify(message="Requested resource does not exist")        
+        complete_activity(user['_id'], activity['_id'])
+        return jsonify(message="Success")
+    else:
+        if 'completionId' in request.args:
+            completion_id = request.args.get('completionId')
+            activity = config.completed_collection.find_one({"_id": int(completion_id)})
+            if not activity:
+                return jsonify(message="Requested resource does not exist")
+            return activity
+        else:
+            user = config.user_collection.find_one({"_id": int(current_user_id)})
+            if not user:
+                return jsonify(message="Requested resource does not exist")
+            activities = dumps(config.completed_collection.find({"user_id": user['_id']}))
+            if not activities:
+                return jsonify(message="Requested resource does not exist")
+            return activities
+   
 
 # get activities
 @app.route('/api/get/activities', methods=["GET"])
@@ -162,6 +178,20 @@ def get_rewards():
         rewardId = request.args.get('rewardId')
         return config.reward_collection.find_one({"_id": int(rewardId)})
     return dumps(config.reward_collection.find())
+
+def complete_activity(user_id, activity_id):
+    completion_id = config.completed_collection.count()
+    while config.completed_collection.count_documents({ '_id': completion_id }, limit = 1) != 0:
+        completion_id += 1
+    activity = config.activity_collection.find_one({"_id": activity_id})
+    user = config.user_collection.find_one({"_id": user_id})
+    score = user['score']
+    score += activity['score']
+
+    completed_activity = user['activity_history']
+    completed_activity.append(activity_id)
+    config.user_collection.find_one_and_update({"_id": user_id}, {'$set': {"activity_history": completed_activity, "score": score}})
+    config.completed_collection.insert_one({"_id": completion_id, "activity_id": activity_id, "user_id": user_id, "completed": datetime.utcnow().isoformat()})
 
 def transact_score(user_id, reward_id):
     reward = config.reward_collection.find_one({"_id": reward_id})
